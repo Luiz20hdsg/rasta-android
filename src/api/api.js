@@ -71,62 +71,7 @@ export const registerDevice = async (email, device_id, companyId) => {
   }
 };
 
-export const getMessages = async (email, startDate, endDate, page = 1) => {
-  try {
-    const url = `${API_BASE_URL}/messages/list/${encodeURIComponent(email)}/${startDate}/${endDate}/${page}`;
-    console.log('Buscando mensagens:', url);
-    
-    const headers = await getHeaders();
-    const response = await fetch(url, {
-      method: 'GET',
-      headers, 
-    });
 
-    const data = await response.json();
-    console.log('Resposta do GET /messages/list:', data);
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Token inválido ou expirado. Faça login novamente.');
-      }
-      throw new Error(data.message || 'Erro ao carregar mensagens');
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('Erro em getMessages:', error);
-    throw error;
-  }
-};
-
-export const markMessageAsRead = async (id) => {
-  try {
-    const payload = { id, readed: true };
-    console.log('Marcando mensagem como lida:', payload);
-    
-    const headers = await getHeaders();
-    const response = await fetch(`${API_BASE_URL}/messages/update/${id}`, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
-    console.log('Resposta do PUT /messages/update:', data);
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Token inválido ou expirado. Faça login novamente.');
-      }
-      throw new Error(data.message || 'Erro ao marcar mensagem como lida');
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('Erro em markMessageAsRead:', error);
-    throw error;
-  }
-};
 
 export const getNotificationSettings = async (email) => {
   try {
