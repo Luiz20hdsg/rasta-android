@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034925533325",
+    "project_id": "devepexpaguex",
+    "storage_bucket": "devepexpaguex.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034925533325:android:936a774de423b083785ac4",
+        "android_client_info": {
+          "package_name": "com.paguex.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEKnYO7jL002tv5-QYFdNa46-OoXJpO9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

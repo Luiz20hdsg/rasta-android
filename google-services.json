@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "875251344350",
+    "project_id": "devepex",
+    "storage_bucket": "devepex.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875251344350:android:a839feed8bb3a4288b734f",
+        "android_client_info": {
+          "package_name": "com.paguex.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjeayyC576sfGt6e8eoswIL4SWyl3v2fI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
