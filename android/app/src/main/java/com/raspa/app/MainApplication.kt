@@ -1,4 +1,4 @@
-package com.paguex.app
+package com.raspa.app
 
 import android.app.Application
 import android.content.res.Configuration

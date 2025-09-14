@@ -1,5 +1,5 @@
 // src/screens/MessageList.js
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Dimensions, RefreshControl, ActivityIndicator, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MessageItem from '../components/MessageItem';
@@ -7,6 +7,7 @@ import { getData, saveData } from '../services/storage';
 import { globalStyles } from '../styles/globalStyles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import { on, off } from '../services/EventEmitter';
 
 const { width, height } = Dimensions.get('window');
 const STORAGE_KEY = 'messages';
@@ -40,6 +41,15 @@ const MessageList = ({ navigation }) => {
       setRefreshing(false);
     }
   }, []);
+
+  useEffect(() => {
+    const handleNewMessage = () => fetchMessages(range);
+    on('newMessage', handleNewMessage);
+
+    return () => {
+      off('newMessage', handleNewMessage);
+    };
+  }, [range, fetchMessages]);
 
   useFocusEffect(
     useCallback(() => {

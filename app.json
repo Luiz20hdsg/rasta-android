@@ -1,16 +1,16 @@
 {
   "expo": {
-    "scheme": "paguex",
-    "name": "PagueX",
-    "slug": "PagueX",
-    "version": "2.0.0",
-    "icon": "./assets/logo_ios.png",
+    "scheme": "raspa",
+    "name": "Raspa",
+    "slug": "Raspa",
+    "version": "1.0.0",
+    "icon": "./assets/logo_raspa_ios",
     "userInterfaceStyle": "light",
     "newArchEnabled": false,
     "splash": {
-      "image": "./assets/logo.png",
+      "image": "./assets/baner_raspa",
       "resizeMode": "contain",
-      "backgroundColor": "#1E1E1E"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "enabled": false
@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.paguex.app",
+      "bundleIdentifier": "com.raspa.app",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSAppTransportSecurity": {
@@ -39,16 +39,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo_android.png",
-        "backgroundColor": "#1E1E1E"
+        "foregroundImage": "./assets/logo_raspa_android.png",
+        "backgroundColor": "#000000"
       },
-      "package": "com.paguex.app",
+      "package": "com.raspa.app",
       "permissions": ["RECEIVE_BOOT_COMPLETED", "VIBRATE", "POST_NOTIFICATIONS", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
       "networkSecurityConfig": true,
       "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/logo_ios.png"
+      "favicon": "./assets/logo_raspa_ios"
     },
     "plugins": [
       [

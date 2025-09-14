@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'PagueX'
+rootProject.name = 'Raspa'
 
 dependencyResolutionManagement {
   versionCatalogs {
