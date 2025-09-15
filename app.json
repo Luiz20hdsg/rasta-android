@@ -1,7 +1,7 @@
 {
   "expo": {
     "scheme": "raspa",
-    "name": "Raspa",
+    "name": "Raspa Premiada",
     "slug": "Raspa",
     "version": "1.0.0",
     "icon": "./assets/logo_raspa_ios",
@@ -38,10 +38,7 @@
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo_raspa_android.png",
-        "backgroundColor": "#000000"
-      },
+      "icon": "./assets/logo_android.png",
       "package": "com.raspa.app",
       "permissions": ["RECEIVE_BOOT_COMPLETED", "VIBRATE", "POST_NOTIFICATIONS", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
       "networkSecurityConfig": true,
@@ -69,6 +66,12 @@
         "onesignal-expo-plugin",
         {
           "mode": "production"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "sounds": ["./android/app/src/main/res/raw/notificacao_som.mp3"]
         }
       ]
     ],

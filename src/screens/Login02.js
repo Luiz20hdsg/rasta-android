@@ -114,7 +114,7 @@ const Login02 = ({ navigation }) => {
             autoFocus={true}
           />
           <Button
-            title={isSubmitting ? '' : "Validar o código"}
+            title={"Validar o código"}
             onPress={handleVerify}
             style={styles.button}
             textStyle={styles.buttonText}
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     },
     logo: {
       width: width * 0.9,
-      height: 220,
+      height: 250,
       resizeMode: 'contain',
       marginBottom: 20,
     },
