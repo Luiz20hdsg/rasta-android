@@ -4,6 +4,7 @@ import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getCompanyData } from '../api/api';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AdModal from '../components/AdModal';
 
 const { width, height } = Dimensions.get('window');
 
@@ -11,6 +12,7 @@ const Menu = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const [companyData, setCompanyData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAdVisible, setAdVisible] = useState(false);
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -21,6 +23,8 @@ const Menu = ({ navigation }) => {
         console.error('Erro ao buscar dados da empresa:', error);
       } finally {
         setLoading(false);
+        // Show the ad once everything is loaded
+        setAdVisible(true);
       }
     };
 
@@ -69,6 +73,7 @@ const Menu = ({ navigation }) => {
           </View>
         </View>
       </View>
+      <AdModal isVisible={isAdVisible} onClose={() => setAdVisible(false)} />
     </SafeAreaView>
   );
 };
