@@ -148,7 +148,7 @@ const MessageList = ({ navigation }) => {
       />
 
       <View style={[styles.footer, { paddingBottom: insets.bottom }]}>
-        <Image source={require('../assets/logo_raspa.png')} style={styles.sublogo} />
+        <Image source={require('../assets/rp_icon.png')} style={styles.sublogo} />
         <View style={styles.footerIcons}>
           <View style={[styles.footerButton, { borderColor: '#19b954' }]}>
             <Icon

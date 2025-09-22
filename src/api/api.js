@@ -189,3 +189,29 @@ export const getCompanyData = async () => {
     throw error;
   }
 };
+
+export const getCurrentAdvertisement = async () => {
+  const apiUrl = 'https://mdjwnstt36.execute-api.us-east-1.amazonaws.com/Prod/advertisement/current';
+  console.log('Buscando anúncio atual:', apiUrl);
+
+  try {
+    const response = await fetch(apiUrl);
+
+    if (response.status === 404) {
+      console.log("Nenhum anúncio ativo encontrado.");
+      return null;
+    }
+
+    if (!response.ok) {
+      throw new Error(`Erro na API de anúncios: ${response.statusText}`);
+    }
+
+    const adData = await response.json();
+    console.log("Dados do anúncio recebidos:", adData);
+    return adData;
+
+  } catch (error) {
+    console.error("Falha ao buscar anúncio:", error);
+    return null;
+  }
+};

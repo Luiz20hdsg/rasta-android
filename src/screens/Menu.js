@@ -8,27 +8,24 @@ import AdModal from '../components/AdModal';
 
 const { width, height } = Dimensions.get('window');
 
-const Menu = ({ navigation }) => {
+const Menu = ({ navigation, adData, isAdVisible, setAdVisible }) => {
   const insets = useSafeAreaInsets();
   const [companyData, setCompanyData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isAdVisible, setAdVisible] = useState(false);
 
   useEffect(() => {
-    const fetchCompanyData = async () => {
+    const initialize = async () => {
       try {
-        const data = await getCompanyData();
-        setCompanyData(data);
+        const company = await getCompanyData();
+        setCompanyData(company);
       } catch (error) {
-        console.error('Erro ao buscar dados da empresa:', error);
+        console.error('Erro ao inicializar a tela de Menu:', error);
       } finally {
         setLoading(false);
-        // Show the ad once everything is loaded
-        setAdVisible(true);
       }
     };
 
-    fetchCompanyData();
+    initialize();
   }, []);
 
   if (loading) {
@@ -58,7 +55,7 @@ const Menu = ({ navigation }) => {
       />
 
       <View style={[styles.footer, { paddingBottom: insets.bottom }]}>
-        <Image source={require('../assets/logo_raspa.png')} style={styles.sublogo} />
+        <Image source={require('../assets/rp_icon.png')} style={styles.sublogo} />
         <View style={styles.footerIcons}>
           <View style={[styles.footerButton, { backgroundColor: '#19b954', borderColor: '#19b954' }]}>
             <Icon name="menu" size={width * 0.055} color={'#000'} />
@@ -73,7 +70,13 @@ const Menu = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <AdModal isVisible={isAdVisible} onClose={() => setAdVisible(false)} />
+      {adData && (
+        <AdModal 
+          isVisible={isAdVisible} 
+          onClose={() => setAdVisible(false)} 
+          adData={adData} 
+        />
+      )}
     </SafeAreaView>
   );
 };

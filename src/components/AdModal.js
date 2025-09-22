@@ -8,29 +8,23 @@ import {
   TouchableOpacity,
   Dimensions,
   Linking,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const { width, height } = Dimensions.get('window');
 
-// Mock data until API is ready
-const MOCK_AD_DATA = {
-  productIcon: { uri: 'https://via.placeholder.com/100x100.png?text=Ad+Icon' },
-  productName: 'Produto Incrível',
-  mediaUrl: 'https://via.placeholder.com/400x300.png?text=Ad+Image',
-  mediaType: 'image', // 'image' or 'video'
-  ctaUrl: 'https://www.google.com',
-};
-
-const AdModal = ({ isVisible, onClose, adData = MOCK_AD_DATA }) => {
-  const [countdown, setCountdown] = useState(10);
+const AdModal = ({ isVisible, onClose, adData }) => {
+  const [countdown, setCountdown] = useState(adData?.durationSeconds || 10);
   const [isClosable, setIsClosable] = useState(false);
   const [isMuted, setMuted] = useState(false);
 
   useEffect(() => {
-    if (isVisible) {
-      setCountdown(10);
+    if (isVisible && adData) {
+      const duration = adData.durationSeconds || 10;
+      setCountdown(duration);
       setIsClosable(false);
+
       const timer = setInterval(() => {
         setCountdown(prev => {
           if (prev <= 1) {
@@ -43,16 +37,30 @@ const AdModal = ({ isVisible, onClose, adData = MOCK_AD_DATA }) => {
       }, 1000);
 
       return () => clearInterval(timer);
-    } 
-  }, [isVisible]);
+    }
+  }, [isVisible, adData]);
 
   const handleObterPress = () => {
-    Linking.openURL(adData.ctaUrl).catch(err => console.error("Couldn't load page", err));
+    if (adData?.ctaButton?.link) {
+      Linking.openURL(adData.ctaButton.link).catch(err => console.error("Couldn't load page", err));
+    }
   };
 
   const timerWidth = useMemo(() => {
-    return `${(countdown / 10) * 100}%`;
-  }, [countdown]);
+    const duration = adData?.durationSeconds || 10;
+    if (duration === 0) return '0%';
+    return `${(countdown / duration) * 100}%`;
+  }, [countdown, adData]);
+
+  if (!adData) {
+    return (
+      <Modal visible={isVisible} transparent={true}>
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#19b954" />
+        </View>
+      </Modal>
+    );
+  }
 
   return (
     <Modal
@@ -70,8 +78,8 @@ const AdModal = ({ isVisible, onClose, adData = MOCK_AD_DATA }) => {
             </View>
 
             <View style={styles.productHeader}>
-              <Image source={adData.productIcon} style={styles.productIcon} />
-              <Text style={styles.productName}>{adData.productName}</Text>
+              {/* A API não fornece um ícone de produto, então esta parte foi removida */}
+              <Text style={styles.productName}>{adData.title}</Text>
             </View>
 
             <View style={styles.mediaContainer}>
@@ -80,13 +88,15 @@ const AdModal = ({ isVisible, onClose, adData = MOCK_AD_DATA }) => {
               ) : (
                 <Text>Video Placeholder</Text> // Placeholder for Video component
               )}
-              <TouchableOpacity style={styles.audioIcon} onPress={() => setMuted(!isMuted)}>
-                <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color="#fff" />
-              </TouchableOpacity>
+              {adData.audioUrl && (
+                <TouchableOpacity style={styles.audioIcon} onPress={() => setMuted(!isMuted)}>
+                  <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color="#fff" />
+                </TouchableOpacity>
+              )}
             </View>
 
             <TouchableOpacity style={styles.ctaButton} onPress={handleObterPress}>
-              <Text style={styles.ctaButtonText}>Obter</Text>
+              <Text style={styles.ctaButtonText}>{adData.ctaButton?.text || 'Obter'}</Text>
             </TouchableOpacity>
           </View>
 
@@ -98,7 +108,7 @@ const AdModal = ({ isVisible, onClose, adData = MOCK_AD_DATA }) => {
           {/* Footer Bar */}
           <View style={styles.footerBar}>
             <View style={styles.footerAppInfo}>
-              <Image source={require('../../assets/icon.png')} style={styles.appIcon} />
+              <Image source={require('../assets/rp_icon.png')} style={styles.appIcon} />
               <Text style={styles.appName}>Raspa Premiada</Text>
             </View>
             <TouchableOpacity onPress={onClose} disabled={!isClosable}>

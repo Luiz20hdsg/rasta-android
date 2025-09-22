@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'Raspa'
+rootProject.name = 'Raspa Premiada'
 
 dependencyResolutionManagement {
   versionCatalogs {

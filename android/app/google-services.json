@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "787512784918",
+    "project_id": "raspa-87424",
+    "storage_bucket": "raspa-87424.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787512784918:android:c494c00ee5ae718f375d37",
+        "android_client_info": {
+          "package_name": "com.raspa.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHr-cB3WQ05qrXBd8-B12VMv3vqPoiUL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
